@@ -23,14 +23,15 @@ class App extends Component {
   }
 
   componentDidUpdate() {
+    console.log("This is the Forecast   ", this.state.forcast);
     var tellMeTheForecast = this.state.forecast;
-    console.log("Forecast   ", this.state.forcast);
     document.getElementById("App").innerHTML = tellMeTheForecast;
   }
+
   render() {
     return (
       <>
-        <div id="App" className="App"></div>
+        <div id="App" className="App" />
       </>
     );
   }
