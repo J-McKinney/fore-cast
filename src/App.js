@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+require("dotenv").config();
 
-// "https://api.openweathermap.org/data/2.5/weather?q=Atlanta,Georgia&units=imperial&appid=166a433c57516f51dfab1f7edaed8413"
-// "https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={APIKey}"
-
-// "https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{long}&key={APIKey}"
-
+// const APIKEY = process.env.REACT_APP_API_KEY;
 function App() {
   const [currentLocation, setCurrentLocation] = useState({});
 
   useEffect(() => {
+    console.log("GoogleKey: " + process.env.REACT_APP_GKEY)
+    console.log("WeatherKey: " + process.env.REACT_APP_WKEY)
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         let coordinates = pos.coords;
