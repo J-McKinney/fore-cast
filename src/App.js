@@ -3,6 +3,9 @@ import logo from "./logo.svg";
 import "./App.css";
 
 // "https://api.openweathermap.org/data/2.5/weather?q=Atlanta,Georgia&units=imperial&appid=166a433c57516f51dfab1f7edaed8413"
+// "https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={APIKey}"
+
+// "https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{long}&key={APIKey}"
 
 function App() {
   const [currentLocation, setCurrentLocation] = useState({});
