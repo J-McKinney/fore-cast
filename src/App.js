@@ -3,13 +3,13 @@ import logo from "./logo.svg";
 import "./App.css";
 require("dotenv").config();
 
-// const APIKEY = process.env.REACT_APP_API_KEY;
+const GKey = process.env.REACT_APP_GKEY;
+const WKey = process.env.REACT_APP_WKEY;
+
 function App() {
   const [currentLocation, setCurrentLocation] = useState({});
 
   useEffect(() => {
-    console.log("GoogleKey: " + process.env.REACT_APP_GKEY)
-    console.log("WeatherKey: " + process.env.REACT_APP_WKEY)
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         let coordinates = pos.coords;
