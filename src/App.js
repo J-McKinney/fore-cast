@@ -3,8 +3,8 @@ import logo from "./logo.svg";
 import "./App.css";
 require("dotenv").config();
 
-// const GKey = process.env.REACT_APP_GKEY;
-// const WKey = process.env.REACT_APP_WKEY;
+const GKey = process.env.REACT_APP_GKEY;
+const WKey = process.env.REACT_APP_WKEY;
 
 function App() {
   const [currentLocation, setCurrentLocation] = useState({});
@@ -26,36 +26,37 @@ function App() {
     );
   }, []);
 
-  // useEffect(() => {
-  //   async function getOneCallData(WKey, position) {
-  //     let lat = position.latitude;
-  //     let lon = position.longitude;
+  useEffect(() => {
+    async function getOneCallData(WKey, position) {
+      let lat = position.latitude;
+      let lon = position.longitude;
 
-  //     const oneCallAPI = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=${WKey}`;
+      const oneCallAPI = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=${WKey}`;
 
-  //     let res = await fetch(oneCallAPI);
-  //     let data = await res.json();
+      let res = await fetch(oneCallAPI);
+      let data = await res.json();
 
-  //     console.log("WeatherCode: " + data);
-  //   }
+      console.log("WeatherCode: " + data);
+    }
 
-  //   async function getReverseGeocodingData(GKey, position) {
-  //     let lat = position.latitude;
-  //     let lon = position.longitude;
+    async function getReverseGeocodingData(GKey, position) {
+      let lat = position.latitude;
+      let lon = position.longitude;
 
-  //     const reverseGeocodingAPI = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${GKey}`;
+      const reverseGeocodingAPI = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${GKey}`;
 
-  //     let res = await fetch(reverseGeocodingAPI);
-  //     let data = await res.json();
+      let res = await fetch(reverseGeocodingAPI);
+      let data = await res.json();
 
-  //     console.log("GeoCode: " + data);
-  //   }
+      console.log("GeoCode: " + data);
+    }
 
-  //   if (typeOf currentLocation.latitude != "undefined") {
-  //     getOneCallData(keys.oneCall, currentLocation);
-  //     getReverseGeocodingData(keys.reverseGeocoding, currentLocation)
-  //   }
-  // }, [currentLocation]);
+    if (typeof currentLocation.latitude != "undefined") {
+      console.log("Hello")
+      getOneCallData(WKey.oneCall, currentLocation);
+      getReverseGeocodingData(GKey.reverseGeocoding, currentLocation)
+    }
+  }, [currentLocation]);
 
   return (
     <>
