@@ -46,7 +46,7 @@
 //       console.log("GeoCode: " + data);
 //     }
 
-//     if (typeof currentLocation.latitude != "undefined") {
+//     if (typeof currentLocation.latitude !== "undefined") {
 //       console.log();
 //       getOneCallData(process.env.REACT_APP_WKEY.oneCall, currentLocation);
 //       getReverseGeocodingData(
@@ -92,16 +92,6 @@ class App extends Component {
   };
 
   componentDidMount() {
-    // console.log("GKey: " + GKey)
-    // console.log("WKey: " + WKey)
-  }
-
-  componentDidUpdate() {
-    console.log("Update Lat: " + this.state.lat);
-    console.log("Update Lon: " + this.state.lon);
-  }
-
-  coordinatesButton = () => {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         let coordinates = pos.coords;
@@ -117,35 +107,35 @@ class App extends Component {
         maximumAge: 0,
       }
     );
-  };
+  }
 
-  //`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=${process.env.REACT_APP_WKEY}`;
-  //`https://api.openweathermap.org/data/2.5/onecall?lat=33.9705856&lon=-84.4857344&exclude=minutely,alerts&appid=7c9fcccfb24695a473809f8f4e32421c`;
+  componentDidUpdate() {}
+
   weatherButton = (e) => {
     e.preventDefault();
-    console.log("Weather Button: ");
     if (this.state.lat !== "undefined") {
-      console.log("Yeah");
       const getOneCallData =
         "https://api.openweathermap.org/data/2.5/onecall?lat=" +
         this.state.lat +
         "&lon=" +
         this.state.lon +
-        "&exclude=alerts&appid=" +
+        "&units=imperial&exclude=minutely,alerts&appid=" +
         WKey;
       axios
         .get(getOneCallData)
         .then((res) => {
-          // console.log(res);
-          this.setState({ weatherResults: res })
-          console.log(this.state.weatherResults);
+          console.log(res.status)
+          this.setState({ weatherResults: res });
+          console.log(this.state.weatherResults.data);
+          // console.log(res.data.current.temp);
           return axios.get(getOneCallData);
         })
         .catch((error) => {
           console.log("My Bad Error: " + error);
         });
     } else {
-      console.log("Something Went Wrong");
+      console.log("Something Went Wrong!!!");
+      alert("Something Went Wrong!!!")
     }
   };
 
@@ -158,7 +148,6 @@ class App extends Component {
             <p>
               Edit <code>src/App.js</code> and save to reload.
             </p>
-            <button onClick={this.coordinatesButton}>Find Coordinates</button>
             <br />
             <button onClick={this.weatherButton}>See Local Weather</button>
           </header>
