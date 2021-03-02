@@ -120,6 +120,7 @@ class App extends Component {
   };
 
   //`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=${process.env.REACT_APP_WKEY}`;
+  //`https://api.openweathermap.org/data/2.5/onecall?lat=33.9705856&lon=-84.4857344&exclude=minutely,alerts&appid=7c9fcccfb24695a473809f8f4e32421c`;
   weatherButton = (e) => {
     e.preventDefault();
     console.log("Weather Button: ");
@@ -135,11 +136,13 @@ class App extends Component {
       axios
         .get(getOneCallData)
         .then((res) => {
-          console.log("getOneCallData: " + res);
+          // console.log(res);
+          this.setState({ weatherResults: res })
+          console.log(this.state.weatherResults);
           return axios.get(getOneCallData);
         })
         .catch((error) => {
-          console.log("My Bad: " + error);
+          console.log("My Bad Error: " + error);
         });
     } else {
       console.log("Something Went Wrong");
