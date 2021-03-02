@@ -104,7 +104,9 @@ class App extends Component {
     );
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    console.log("Updated Component: ")
+  }
 
   weatherButton = (e) => {
     e.preventDefault();
