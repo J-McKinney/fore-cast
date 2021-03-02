@@ -3,7 +3,6 @@
 // import "./App.css";
 // require("dotenv").config();
 
-
 // function App() {
 //   const [currentLocation, setCurrentLocation] = useState({});
 
@@ -79,12 +78,12 @@ import logo from "./logo.svg";
 import "./App.css";
 require("dotenv").config();
 
-
 class App extends Component {
   state = {
     lat: "",
     lon: "",
     weatherResults: "",
+    geocodeResults: "",
   };
 
   componentDidMount() {
@@ -120,18 +119,41 @@ class App extends Component {
       axios
         .get(getOneCallData)
         .then((res) => {
-          console.log(res.status)
           this.setState({ weatherResults: res });
           console.log(this.state.weatherResults.data);
-          // console.log(res.data.current.temp);
           return axios.get(getOneCallData);
         })
         .catch((error) => {
-          console.log("My Bad Error: " + error);
+          console.log("OpenWeather Error: " + error);
         });
     } else {
-      console.log("Something Went Wrong!!!");
-      alert("Something Went Wrong!!!")
+      console.log("Something Weather Went Wrong!!!");
+    }
+  };
+
+  cityButton = (e) => {
+    e.preventDefault();
+    // https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${process.env.REACT_APP_GKEY}
+    if (this.state.lat !== "undefined") {
+      const reverseGeocoding =
+        "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+        this.state.lat +
+        "," +
+        this.state.lon +
+        "&key=" +
+        process.env.REACT_APP_GKEY;
+      axios
+        .get(reverseGeocoding)
+        .then((res) => {
+          this.setState({ geocodeResults: res });
+          console.log(this.state.geocodeResults);
+          return axios.get(reverseGeocoding);
+        })
+        .catch((error) => {
+          console.log("Google Error Oops!!! " + error);
+        });
+    } else {
+      console.log("Something Google Went Wrong!!!");
     }
   };
 
@@ -146,6 +168,8 @@ class App extends Component {
             </p>
             <br />
             <button onClick={this.weatherButton}>See Local Weather</button>
+            <br />
+            <button onClick={this.cityButton}>See Your City</button>
           </header>
         </div>
       </>
