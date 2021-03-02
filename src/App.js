@@ -3,8 +3,6 @@
 // import "./App.css";
 // require("dotenv").config();
 
-// const GKey = process.env.REACT_APP_GKEY;
-// const WKey = process.env.REACT_APP_WKEY;
 
 // function App() {
 //   const [currentLocation, setCurrentLocation] = useState({});
@@ -81,8 +79,6 @@ import logo from "./logo.svg";
 import "./App.css";
 require("dotenv").config();
 
-// const GKey = process.env.REACT_APP_GKEY;
-const WKey = process.env.REACT_APP_WKEY;
 
 class App extends Component {
   state = {
@@ -120,7 +116,7 @@ class App extends Component {
         "&lon=" +
         this.state.lon +
         "&units=imperial&exclude=minutely,alerts&appid=" +
-        WKey;
+        process.env.REACT_APP_WKEY;
       axios
         .get(getOneCallData)
         .then((res) => {
