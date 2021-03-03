@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 require("dotenv").config();
 
 function App() {
   const [currentLocation, setCurrentLocation] = useState({});
+  const [cityInfo, setCityInfo] = useState({});
+  const [forecast, setForecast] = useState({});
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         let coordinates = pos.coords;
         setCurrentLocation(coordinates);
-        // console.log(coordinates);
       },
       (err) => {
         console.warn(`Error(${err.code}): ${err.message}`);
@@ -25,7 +25,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    async function fetchData(APIKey, APIName, position) {
+    async function fetchData(APIKey, APIName, position, stateFunction) {
       let lat = position.latitude;
       let lon = position.longitude;
       let APICall;
@@ -44,32 +44,42 @@ function App() {
 
       let response = await fetch(APICall);
       let data = await response.json();
-      console.log(data);
+      APIName === "reverseGeocoding"
+        ? stateFunction(data.results[0].address_components)
+        : stateFunction(data);
     }
 
     if (typeof currentLocation.latitude !== "undefined") {
-      fetchData(process.env.REACT_APP_WKEY.oneCall, "oneCall", currentLocation);
+      fetchData(
+        process.env.REACT_APP_WKEY.oneCall,
+        "oneCall",
+        currentLocation,
+        setForecast
+      );
       fetchData(
         process.env.REACT_APP_GKEY.reverseGeocoding,
         "reverseGeocoding",
-        currentLocation
+        currentLocation,
+        setCityInfo
       );
     }
   }, [currentLocation]);
 
   return (
     <>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <button onClick={() => console.log(currentLocation)}>
-            Show Coordinates
-          </button>
-        </header>
-      </div>
+      {typeof forecast.current !== "undefined" &&
+      typeof cityInfo[1] !== "undefined" ? (
+        <section>
+          <h3>Temp: {forecast.current.temp} Kelvin</h3>
+          <h5>Humidity: {forecast.current.humidity} %</h5>
+          <h5>Wind Speed: {forecast.current.wind_speed} m/s</h5>
+          <h3>
+            {cityInfo[1].long_name}, {cityInfo[3].short_name}
+          </h3>
+        </section>
+      ) : (
+        ""
+      )}
     </>
   );
 }
