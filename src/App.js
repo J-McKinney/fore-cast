@@ -32,7 +32,7 @@ function App() {
 
       switch (APIName) {
         case "oneCall":
-          APICall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=${process.env.REACT_APP_WKEY}`;
+          APICall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,alerts&appid=${process.env.REACT_APP_WKEY}`;
           break;
         case "reverseGeocoding":
           APICall = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&result_type=political&key=${process.env.REACT_APP_GKEY}`;
@@ -70,7 +70,7 @@ function App() {
       {typeof forecast.current !== "undefined" &&
       typeof cityInfo[1] !== "undefined" ? (
         <section>
-          <h3>Temp: {forecast.current.temp} Kelvin</h3>
+          <h3>Temp: {forecast.current.temp} Fehrenheit</h3>
           <h5>Humidity: {forecast.current.humidity} %</h5>
           <h5>Wind Speed: {forecast.current.wind_speed} m/s</h5>
           <h3>
