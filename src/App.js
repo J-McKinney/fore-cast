@@ -105,7 +105,8 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    console.log("Updated Component: ")
+    console.log("Updated Component: " + this.state.lat)
+    console.log("Updated Component: " + this.state.lon)
   }
 
   weatherButton = (e) => {
@@ -135,7 +136,6 @@ class App extends Component {
 
   cityButton = (e) => {
     e.preventDefault();
-    // https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${process.env.REACT_APP_GKEY}
     if (this.state.lat !== "undefined") {
       const reverseGeocoding =
         "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
