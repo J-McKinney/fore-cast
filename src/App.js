@@ -12,6 +12,7 @@
 //       (pos) => {
 //         let coordinates = pos.coords;
 //         setCurrentLocation(coordinates);
+//         console.log("coordinates: ", coordinates);
 //       },
 //       (err) => {
 //         console.warn(`Error(${err.code}): ${err.message}`);
@@ -94,10 +95,14 @@ require("dotenv").config();
 
 class App extends Component {
   state = {
+    weatherResults: "",
+    temp: "",
+    windSpeed: "",
+    weatherDescription: "",
+    geocodeResults: "",
     lat: "",
     lon: "",
-    weatherResults: "",
-    geocodeResults: "",
+    cityInfo: "",
   };
 
   componentDidMount() {
@@ -106,10 +111,6 @@ class App extends Component {
         let coordinates = pos.coords;
         this.setState({ lat: coordinates.latitude });
         this.setState({ lon: coordinates.longitude });
-        console.log("Mount Lat: " + this.state.lat);
-        console.log("Mount Lon: " + this.state.lon);
-        console.log("Mount weather: " + this.state.weatherResults);
-        console.log("Mount geocode: " + this.state.geocodeResults);
       },
       (err) => {
         console.warn(`Error(${err.code}): ${err.message}`);
@@ -122,15 +123,9 @@ class App extends Component {
     );
   }
 
-  componentDidUpdate() {
-    console.log("Updated Lat: " + this.state.lat);
-    console.log("Updated Lon: " + this.state.lon);
-    console.log("Updated weather:");
-    console.log(this.state.weatherResults);
-    console.log("Updated geocode:");
-    console.log(this.state.geocodeResults);
-  }
+  componentDidUpdate() {}
 
+  // NEED TO CLEAN UP THIS CODE AND MAKE IT MORE SIMPLE AND NOT SO LONG/////////////////////////////////////////////
   weatherButton = (e) => {
     e.preventDefault();
     if (this.state.lat !== "undefined") {
@@ -145,20 +140,19 @@ class App extends Component {
       axios
         .get(getOneCallData)
         .then((res) => {
+          //setting the res to weather state
           this.setState({ weatherResults: res });
-          // console.log(this.state.weatherResults.data);
+          // Logging the weather information
+          console.log(res.data.current.temp); // Need to set weather info to state////////////////////////////////////
+          console.log(res.data.current.weather[0].description);
+          console.log(res.data.current.wind_speed);
           return axios.get(getOneCallData);
         })
         .catch((error) => {
           console.log("OpenWeather Error: " + error);
         });
-    } else {
-      console.log("Something Weather Went Wrong!!!");
     }
-  };
 
-  cityButton = (e) => {
-    e.preventDefault();
     if (this.state.lat !== "undefined") {
       const reverseGeocoding =
         "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
@@ -171,16 +165,19 @@ class App extends Component {
         .get(reverseGeocoding)
         .then((res) => {
           //setting the res to geocode state
-          this.setState({ geocodeResults: res });
+          this.setState({ geocodeResults: res }); // Need to set city info to state//////////////////////////////////////
           // Logging the geocode information
-          // console.log(this.state.geocodeResults.data);
+          console.log(res.data.results[0].address_components);
+          console.log(res.data.results[0].address_components[2].long_name);
+          console.log(res.data.results[0].address_components[4].short_name);
+          console.log(res.data.results[0].address_components[6].long_name);
           return axios.get(reverseGeocoding);
         })
         .catch((error) => {
           console.log("Google Error Oops!!! " + error);
         });
     } else {
-      console.log("Something Google Went Wrong!!!");
+      console.log("Something Went Wrong!!!");
     }
   };
 
@@ -195,8 +192,6 @@ class App extends Component {
             </p>
             <br />
             <button onClick={this.weatherButton}>See Local Weather</button>
-            <br />
-            <button onClick={this.cityButton}>See Your City</button>
           </header>
         </div>
       </>
