@@ -106,6 +106,10 @@ class App extends Component {
         let coordinates = pos.coords;
         this.setState({ lat: coordinates.latitude });
         this.setState({ lon: coordinates.longitude });
+        console.log("Mount Lat: " + this.state.lat);
+        console.log("Mount Lon: " + this.state.lon);
+        console.log("Mount weather: " + this.state.weatherResults);
+        console.log("Mount geocode: " + this.state.geocodeResults);
       },
       (err) => {
         console.warn(`Error(${err.code}): ${err.message}`);
@@ -119,8 +123,12 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    // console.log("Updated Component: " + this.state.lat);
-    // console.log("Updated Component: " + this.state.lon);
+    console.log("Updated Lat: " + this.state.lat);
+    console.log("Updated Lon: " + this.state.lon);
+    console.log("Updated weather:");
+    console.log(this.state.weatherResults);
+    console.log("Updated geocode:");
+    console.log(this.state.geocodeResults);
   }
 
   weatherButton = (e) => {
@@ -138,7 +146,7 @@ class App extends Component {
         .get(getOneCallData)
         .then((res) => {
           this.setState({ weatherResults: res });
-          console.log(this.state.weatherResults.data);
+          // console.log(this.state.weatherResults.data);
           return axios.get(getOneCallData);
         })
         .catch((error) => {
@@ -165,7 +173,7 @@ class App extends Component {
           //setting the res to geocode state
           this.setState({ geocodeResults: res });
           // Logging the geocode information
-          console.log(this.state.geocodeResults.data);
+          // console.log(this.state.geocodeResults.data);
           return axios.get(reverseGeocoding);
         })
         .catch((error) => {
