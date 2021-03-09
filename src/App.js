@@ -201,8 +201,13 @@ class App extends Component {
               <h5>Wind Speed: {this.state.windSpeed} mph</h5>
               <h5>Fore-cast: {this.state.weatherDescription}</h5>
               <h3>
-                Location: {this.state.city}, {this.state.state}.{" "}
-                {this.state.zip}
+                Location:
+                {" " +
+                  this.state.city +
+                  ", " +
+                  this.state.state +
+                  ". " +
+                  this.state.zip}
               </h3>
             </section>
           </header>
