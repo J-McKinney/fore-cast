@@ -99,9 +99,10 @@ class App extends Component {
     temp: "",
     humidity: "",
     windSpeed: "",
+    weatherDescription: "",
     city: "",
     state: "",
-    weatherDescription: "",
+    zip: "",
     geocodeResults: "",
     lat: "",
     lon: "",
@@ -127,7 +128,7 @@ class App extends Component {
 
   componentDidUpdate() {}
 
-  // NEED TO CLEAN UP THIS CODE AND MAKE IT MORE SIMPLE AND NOT SO LONG/////////////////////////////////////////////
+  // NEED TO CLEAN UP THIS CODE AND MAKE IT MORE SIMPLE AND NOT SO LONG AND MAKE IT SINGLE FUNCTION/////////////////////////////////////////////
   weatherButton = (e) => {
     e.preventDefault();
     if (this.state.lat !== "undefined") {
@@ -142,25 +143,13 @@ class App extends Component {
       axios
         .get(getOneCallData)
         .then((res) => {
-          //setting the res to weather state
-          this.setState({ weatherResults: res });
-          // console.log(this.state.weatherResults);
-
-          // Logging the weather information
-          this.setState({ temp: res.data.current.temp });
-          // console.log(this.state.temp);
-
-          this.setState({ humidity: res.data.current.humidity });
-          // console.log(this.state.humidity);
-
           this.setState({
+            weatherResults: res,
+            temp: res.data.current.temp,
+            humidity: res.data.current.humidity,
             weatherDescription: res.data.current.weather[0].description,
+            windSpeed: res.data.current.wind_speed,
           });
-          // console.log(this.state.weatherDescription);
-
-          this.setState({ windSpeed: res.data.current.wind_speed });
-          // console.log(this.state.windSpeed);
-
           return axios.get(getOneCallData);
         })
         .catch((error) => {
@@ -179,13 +168,12 @@ class App extends Component {
       axios
         .get(reverseGeocoding)
         .then((res) => {
-          //setting the res to geocode state
-          this.setState({ geocodeResults: res }); // Need to set city info to state//////////////////////////////////////
-          // Logging the geocode information
-          // console.log(res.data.results[0].address_components);
-          console.log(res.data.results[0].address_components[2].long_name);
-          console.log(res.data.results[0].address_components[4].short_name);
-          console.log(res.data.results[0].address_components[6].long_name);
+          this.setState({
+            geocodeResults: res,
+            city: res.data.results[0].address_components[2].long_name,
+            state: res.data.results[0].address_components[4].short_name,
+            zip: res.data.results[0].address_components[6].long_name,
+          });
           return axios.get(reverseGeocoding);
         })
         .catch((error) => {
@@ -208,11 +196,14 @@ class App extends Component {
             <br />
             <button onClick={this.weatherButton}>See Local Weather</button>
             <section>
-              <h3>Temp: </h3>
-              <h5>Humidity: </h5>
-              <h5>Wind Speed: </h5>
-              <h5>Fore-cast: </h5>
-              <h3>Location: </h3>
+              <h3>Temp: {this.state.temp} Fehrenheit</h3>
+              <h5>Humidity: {this.state.humidity}%</h5>
+              <h5>Wind Speed: {this.state.windSpeed} mph</h5>
+              <h5>Fore-cast: {this.state.weatherDescription}</h5>
+              <h3>
+                Location: {this.state.city}, {this.state.state}.{" "}
+                {this.state.zip}
+              </h3>
             </section>
           </header>
         </div>
