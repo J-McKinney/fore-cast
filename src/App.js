@@ -93,8 +93,6 @@ import axios from "axios";
 import logo from "./logo.svg";
 import "./App.css";
 require("dotenv").config();
-const yelp = require("yelp-fusion");
-const client = yelp.client(process.env.REACT_APP_YKEY);
 
 class App extends Component {
   state = {
@@ -190,17 +188,6 @@ class App extends Component {
   yelpButton = (e) => {
     e.preventDefault();
     console.log("Yelp!!!");
-      client
-        .search({
-          term: "Four Barrel Coffee",
-          location: "san francisco, ca",
-        })
-        .then((response) => {
-          console.log(response.jsonBody.businesses[0].name);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
   };
 
   render() {
