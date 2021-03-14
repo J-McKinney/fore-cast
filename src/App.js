@@ -188,7 +188,34 @@ class App extends Component {
   yelpButton = (e) => {
     e.preventDefault();
     console.log("Yelp!!!");
-    // const yelp = "https://api.yelp.com/v3/" + 
+    // const yelpCall = `${"https://cors-anywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/north-india-restaurant-san-francisco/reviews`;
+    // axios
+    //   .get(yelpCall)
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((error) => {
+    //     console.log("Yelp Error: " + error);
+    //   });
+    axios.get(
+      `${"https://cors-anywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/search`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_YKEY}`,
+        },
+        params: {
+          location: "Atlanta",
+          categories: "breakfast_brunch",
+        }
+          .then((json) => {
+            // setItems({ items: json.data.businesses });
+            console.log(json.data);
+          })
+          .catch((err) => {
+            console.log("error");
+          }),
+      }
+    );
   };
 
   render() {
@@ -197,19 +224,19 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <br />
             <button onClick={this.weatherButton}>See Local Weather</button>
             <br />
             <button onClick={this.yelpButton}>See Yelp</button>
-            <section>
-              <h3>Temp: {this.state.temp} Fehrenheit</h3>
-              <h5>Humidity: {this.state.humidity}%</h5>
-              <h5>Wind Speed: {this.state.windSpeed} mph</h5>
-              <h5>Fore-cast: {this.state.weatherDescription}</h5>
-              <h3>
+            <section className="section">
+              <h3 className="section">Temp: {this.state.temp} Fehrenheit</h3>
+              <h5 className="section">Humidity: {this.state.humidity}%</h5>
+              <h5 className="section">
+                Wind Speed: {this.state.windSpeed} mph
+              </h5>
+              <h5 className="section">
+                Fore-cast: {this.state.weatherDescription}
+              </h5>
+              <h3 className="section">
                 Location:
                 {" " +
                   this.state.city +
