@@ -93,6 +93,8 @@ import axios from "axios";
 import logo from "./logo.svg";
 import "./App.css";
 require("dotenv").config();
+const yelp = require("yelp-fusion");
+const client = yelp.client(process.env.REACT_APP_YKEY);
 
 class App extends Component {
   state = {
@@ -188,34 +190,17 @@ class App extends Component {
   yelpButton = (e) => {
     e.preventDefault();
     console.log("Yelp!!!");
-    // const yelpCall = `${"https://cors-anywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/north-india-restaurant-san-francisco/reviews`;
-    // axios
-    //   .get(yelpCall)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((error) => {
-    //     console.log("Yelp Error: " + error);
-    //   });
-    axios.get(
-      `${"https://cors-anywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/search`,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_YKEY}`,
-        },
-        params: {
-          location: "Atlanta",
-          categories: "breakfast_brunch",
-        }
-          .then((json) => {
-            // setItems({ items: json.data.businesses });
-            console.log(json.data);
-          })
-          .catch((err) => {
-            console.log("error");
-          }),
-      }
-    );
+      client
+        .search({
+          term: "Four Barrel Coffee",
+          location: "san francisco, ca",
+        })
+        .then((response) => {
+          console.log(response.jsonBody.businesses[0].name);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
   };
 
   render() {
