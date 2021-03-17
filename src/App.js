@@ -187,7 +187,24 @@ class App extends Component {
 
   yelpButton = (e) => {
     e.preventDefault();
-    console.log("Yelp!!!");
+    const yelpAPI = axios.get(
+      `${"https://corsanywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/search?location=atlanta`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_YKEY}`,
+        },
+        params: {
+          term: "golf",
+        },
+      }
+    );
+    return yelpAPI
+      .then((res) => {
+        console.log(res.data.businesses);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   render() {
