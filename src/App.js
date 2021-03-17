@@ -129,12 +129,11 @@ class App extends Component {
 
   componentDidUpdate() {}
 
-  // NEED TO CLEAN UP THIS CODE AND MAKE IT MORE SIMPLE AND NOT SO LONG AND MAKE IT SINGLE FUNCTION/////////////////////////////////////////////
   weatherButton = (e) => {
     e.preventDefault();
     if (this.state.lat !== "undefined") {
-      const getOneCallData =
-        // openweather API
+      const weatherAPI =
+        // Openweather API
         "https://api.openweathermap.org/data/2.5/onecall?lat=" +
         this.state.lat +
         "&lon=" +
@@ -142,7 +141,7 @@ class App extends Component {
         "&units=imperial&exclude=minutely,alerts&appid=" +
         process.env.REACT_APP_WKEY;
       axios
-        .get(getOneCallData)
+        .get(weatherAPI)
         .then((res) => {
           this.setState({
             weatherResults: res,
@@ -151,14 +150,12 @@ class App extends Component {
             weatherDescription: res.data.current.weather[0].description,
             windSpeed: res.data.current.wind_speed,
           });
-          return axios.get(getOneCallData);
+          return axios.get(weatherAPI);
         })
         .catch((error) => {
-          console.log("OpenWeather Error: " + error);
+          console.log(error);
         });
-    }
-
-    if (this.state.lat !== "undefined") {
+      // Reverse Geocoding API
       const reverseGeocoding =
         "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
         this.state.lat +
@@ -178,7 +175,7 @@ class App extends Component {
           return axios.get(reverseGeocoding);
         })
         .catch((error) => {
-          console.log("Google Error Oops!!! " + error);
+          console.log(error);
         });
     } else {
       console.log("Something Went Wrong!!!");
@@ -188,7 +185,7 @@ class App extends Component {
   yelpButton = (e) => {
     e.preventDefault();
     const yelpAPI = axios.get(
-      `${"https://corsanywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/search?location=atlanta`,
+      `${"https://corsanywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/search?location=marietta`,
       {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_YKEY}`,
