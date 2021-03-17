@@ -107,6 +107,9 @@ class App extends Component {
     geocodeResults: "",
     lat: "",
     lon: "",
+    // sort_by: "distance", "rating"
+    // price: "$", "$$", "$$$", "$$$$"
+    // attributes: "open_to_all"
   };
 
   componentDidMount() {
@@ -188,19 +191,23 @@ class App extends Component {
     console.log(this.state.lat + ", " + this.state.lon);
     const yelpAPI = axios.get(
       `${"https://corsanywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/search`,
-      // `${"https://corsanywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/search?location=marietta`,
-      // `${"https://corsanywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/search?location=georgia`,
       {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_YKEY}`,
         },
         params: {
           term: "golf",
+          categories: "golf",
+          limit: 50,
+          radius: 40000,
+          sort_by: "distance",
+          open_now: true,
           latitude: this.state.lat,
           longitude: this.state.lon,
         },
       }
     );
+    console.log(yelpAPI);
     return yelpAPI
       .then((res) => {
         console.log(res.data.businesses);
