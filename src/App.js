@@ -115,6 +115,7 @@ class App extends Component {
         let coordinates = pos.coords;
         this.setState({ lat: coordinates.latitude });
         this.setState({ lon: coordinates.longitude });
+        console.log(coordinates);
       },
       (err) => {
         console.warn(`Error(${err.code}): ${err.message}`);
@@ -184,14 +185,19 @@ class App extends Component {
 
   yelpButton = (e) => {
     e.preventDefault();
+    console.log(this.state.lat + ", " + this.state.lon);
     const yelpAPI = axios.get(
-      `${"https://corsanywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/search?location=marietta`,
+      `${"https://corsanywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/search`,
+      // `${"https://corsanywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/search?location=marietta`,
+      // `${"https://corsanywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/search?location=georgia`,
       {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_YKEY}`,
         },
         params: {
           term: "golf",
+          latitude: this.state.lat,
+          longitude: this.state.lon,
         },
       }
     );
