@@ -201,13 +201,13 @@ class App extends Component {
           limit: 50,
           radius: 40000,
           sort_by: "distance",
-          open_now: true,
+          // open_now will need to be set to true for the user
+          // open_now: true,
           latitude: this.state.lat,
           longitude: this.state.lon,
         },
       }
     );
-    console.log(yelpAPI);
     return yelpAPI
       .then((res) => {
         console.log(res.data.businesses);
