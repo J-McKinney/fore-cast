@@ -266,6 +266,7 @@ class App extends Component {
                   ". " +
                   this.state.zip}
               </h3>
+              <h3>Golf Information:</h3>
             </section>
           </header>
         </div>
