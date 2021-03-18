@@ -216,6 +216,7 @@ class App extends Component {
         this.state.placesToGolf.forEach(function (item, key) {
           // console.log(key, item);
           console.log(
+            "\n",
             "Key: " + key,
             "\n",
             "Lat: " + item.coordinates.latitude, // Each golf place's latitude
