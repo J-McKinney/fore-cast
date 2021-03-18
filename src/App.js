@@ -105,20 +105,22 @@ class App extends Component {
     state: "",
     zip: "",
     geocodeResults: "",
-    lat: "",
-    lon: "",
+    myLat: "",
+    myLon: "",
     // sort_by: "distance", "rating"
     // price: "$", "$$", "$$$", "$$$$"
     // attributes: "open_to_all"
     placesToGolf: {},
+    pickedGolfLat: "",
+    pickedGolfLon: "",
   };
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         let coordinates = pos.coords;
-        this.setState({ lat: coordinates.latitude });
-        this.setState({ lon: coordinates.longitude });
+        this.setState({ myLat: coordinates.latitude });
+        this.setState({ myLon: coordinates.longitude });
         console.log(coordinates);
       },
       (err) => {
@@ -136,13 +138,13 @@ class App extends Component {
 
   weatherButton = (e) => {
     e.preventDefault();
-    if (this.state.lat !== "undefined") {
+    if (this.state.myLat !== "undefined") {
       const weatherAPI =
         // Openweather API
         "https://api.openweathermap.org/data/2.5/onecall?lat=" +
-        this.state.lat +
+        this.state.myLat +
         "&lon=" +
-        this.state.lon +
+        this.state.myLon +
         "&units=imperial&exclude=minutely,alerts&appid=" +
         process.env.REACT_APP_WKEY;
       axios
@@ -163,9 +165,9 @@ class App extends Component {
       // Reverse Geocoding API
       const reverseGeocoding =
         "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
-        this.state.lat +
+        this.state.myLat +
         "," +
-        this.state.lon +
+        this.state.myLon +
         "&key=" +
         process.env.REACT_APP_GKEY;
       axios
@@ -211,7 +213,6 @@ class App extends Component {
     return yelpAPI
       .then((res) => {
         this.setState({ placesToGolf: res.data.businesses });
-        // console.log(this.state.placesToGolf);
         this.state.placesToGolf.forEach(function (item, key) {
           // console.log(key, item);
           console.log(
