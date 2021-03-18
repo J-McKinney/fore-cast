@@ -110,6 +110,7 @@ class App extends Component {
     // sort_by: "distance", "rating"
     // price: "$", "$$", "$$$", "$$$$"
     // attributes: "open_to_all"
+    placesToGolf: {},
   };
 
   componentDidMount() {
@@ -188,7 +189,6 @@ class App extends Component {
 
   yelpButton = (e) => {
     e.preventDefault();
-    console.log(this.state.lat + ", " + this.state.lon);
     const yelpAPI = axios.get(
       `${"https://corsanywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/search`,
       {
@@ -210,7 +210,28 @@ class App extends Component {
     );
     return yelpAPI
       .then((res) => {
-        console.log(res.data.businesses);
+        this.setState({ placesToGolf: res.data.businesses });
+        // console.log(this.state.placesToGolf);
+        this.state.placesToGolf.forEach(function (item, key) {
+          // console.log(key, item);
+          console.log(
+            key,
+            "\n",
+            item.coordinates.latitude, // Each golf place's latitude
+            "\n",
+            item.coordinates.longitude, // Each golf place's longitude
+            "\n",
+            item.name, // Each golf place's business name
+            "\n",
+            item.display_phone, // Each golf place's phone number
+            "\n",
+            item.location.display_address[0], // Each golf place's street address
+            "\n",
+            item.location.display_address[1], // Each golf place's city/state/zip
+            "\n",
+            item.rating // Each golf place's rating
+          );
+        });
       })
       .catch((error) => {
         console.log(error);
