@@ -205,8 +205,8 @@ class App extends Component {
           sort_by: "distance",
           // open_now will need to be set to true for the user
           // open_now: true,
-          latitude: this.state.lat,
-          longitude: this.state.lon,
+          latitude: this.state.myLat,
+          longitude: this.state.myLon,
         },
       }
     );
@@ -216,21 +216,22 @@ class App extends Component {
         this.state.placesToGolf.forEach(function (item, key) {
           // console.log(key, item);
           console.log(
-            key,
+            "Key: " + key,
             "\n",
-            item.coordinates.latitude, // Each golf place's latitude
+            "Lat: " + item.coordinates.latitude, // Each golf place's latitude
             "\n",
-            item.coordinates.longitude, // Each golf place's longitude
+            "Lon: " + item.coordinates.longitude, // Each golf place's longitude
             "\n",
-            item.name, // Each golf place's business name
+            "Name: " + item.name, // Each golf place's business name
             "\n",
-            item.display_phone, // Each golf place's phone number
+            "Phone Number: " + item.display_phone, // Each golf place's phone number
             "\n",
-            item.location.display_address[0], // Each golf place's street address
+            "Address: " +
+              item.location.display_address[0] +
+              ", " +
+              item.location.display_address[1], // Each golf place's street address + city/state/zip
             "\n",
-            item.location.display_address[1], // Each golf place's city/state/zip
-            "\n",
-            item.rating // Each golf place's rating
+            "Rating: " + item.rating + "/5" // Each golf place's rating
           );
         });
       })
