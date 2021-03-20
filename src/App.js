@@ -110,10 +110,9 @@ class App extends Component {
     // sort_by: "distance", "rating"
     // price: "$", "$$", "$$$", "$$$$"
     // attributes: "open_to_all"
-    placesToGolf: {},
+    placesToGolf: [],
     pickedGolfLat: "",
     pickedGolfLon: "",
-    golfResults: [],
   };
 
   componentDidMount() {
@@ -216,26 +215,27 @@ class App extends Component {
         this.setState({ placesToGolf: res.data.businesses });
         this.state.placesToGolf.forEach(function (item, key) {
           // console.log(key, item);
-          console.log(
-            "\n",
-            "Key: " + key,
-            "\n",
-            "Lat: " + item.coordinates.latitude, // Each golf place's latitude
-            "\n",
-            "Lon: " + item.coordinates.longitude, // Each golf place's longitude
-            "\n",
-            "Name: " + item.name, // Each golf place's business name
-            "\n",
-            "Phone Number: " + item.display_phone, // Each golf place's phone number
-            "\n",
-            "Address: " +
-              item.location.display_address[0] +
-              ", " +
-              item.location.display_address[1], // Each golf place's street address + city/state/zip
-            "\n",
-            "Rating: " + item.rating + "/5" // Each golf place's rating
-          );
+          // console.log(
+          //   "\n",
+          //   "Key: " + key,
+          //   "\n",
+          //   "Lat: " + item.coordinates.latitude, // Each golf place's latitude
+          //   "\n",
+          //   "Lon: " + item.coordinates.longitude, // Each golf place's longitude
+          //   "\n",
+          //   "Name: " + item.name, // Each golf place's business name
+          //   "\n",
+          //   "Phone Number: " + item.display_phone, // Each golf place's phone number
+          //   "\n",
+          //   "Address: " +
+          //     item.location.display_address[0] +
+          //     ", " +
+          //     item.location.display_address[1], // Each golf place's street address + city/state/zip
+          //   "\n",
+          //   "Rating: " + item.rating + "/5" // Each golf place's rating
+          // );
         });
+        console.log(this.state.placesToGolf);
       })
       .catch((error) => {
         console.log(error);
