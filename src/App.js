@@ -270,7 +270,6 @@ class App extends Component {
                   this.state.zip}
               </h3>
               <h3>Golf Information:</h3>
-              <div id="display-data">{this.state.placesToGolf}</div>
             </section>
           </header>
         </div>
