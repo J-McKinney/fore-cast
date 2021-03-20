@@ -113,7 +113,7 @@ class App extends Component {
     placesToGolf: {},
     pickedGolfLat: "",
     pickedGolfLon: "",
-    golfResults: {},
+    golfResults: [],
   };
 
   componentDidMount() {
