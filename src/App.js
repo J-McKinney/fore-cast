@@ -134,8 +134,6 @@ class App extends Component {
     );
   }
 
-  componentDidUpdate() {}
-
   weatherButton = (e) => {
     e.preventDefault();
     if (this.state.myLat !== "undefined") {
@@ -191,6 +189,7 @@ class App extends Component {
 
   yelpButton = (e) => {
     e.preventDefault();
+    // Yelp API
     const yelpAPI = axios.get(
       `${"https://corsanywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/search`,
       {
@@ -213,30 +212,6 @@ class App extends Component {
     return yelpAPI
       .then((res) => {
         this.setState({ placesToGolf: res.data.businesses });
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // console.log(res.data);
-        // this.setState({ placesToGolf: res.data.businesses });
-        // this.state.placesToGolf.forEach(function (item, key) {
-        // console.log(
-        //   "\n",
-        //   "Key: " + key,
-        //   "\n",
-        //   "Lat: " + item.coordinates.latitude, // Each golf place's latitude
-        //   "\n",
-        //   "Lon: " + item.coordinates.longitude, // Each golf place's longitude
-        //   "\n",
-        //   "Name: " + item.name, // Each golf place's business name
-        //   "\n",
-        //   "Phone Number: " + item.display_phone, // Each golf place's phone number
-        //   "\n",
-        //   "Address: " +
-        //     item.location.display_address[0] +
-        //     ", " +
-        //     item.location.display_address[1], // Each golf place's street address + city/state/zip
-        //   "\n",
-        //   "Rating: " + item.rating + "/5" // Each golf place's rating
-        // );
-        // });
         console.log(this.state.placesToGolf);
       })
       .catch((error) => {
@@ -271,7 +246,9 @@ class App extends Component {
                   ". " +
                   this.state.zip}
               </h3>
-              <h3>Golf Information:</h3>
+              <hr />
+              <h3>Golf Results Closest To Furthest From You:</h3>
+              <hr />
               <div>
                 {this.state.placesToGolf
                   .filter((place) => place)

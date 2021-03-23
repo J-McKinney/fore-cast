@@ -33,6 +33,9 @@
   }
 }
 
-.scetion {
+.section {
   font-size: calc(10px + 2vmin);
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
 }
