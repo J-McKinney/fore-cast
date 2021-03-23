@@ -134,7 +134,57 @@ class App extends Component {
     );
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    // if (this.state.myLat !== "undefined") {
+    //   const weatherAPI =
+    //     // Openweather API
+    //     "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+    //     this.state.myLat +
+    //     "&lon=" +
+    //     this.state.myLon +
+    //     "&units=imperial&exclude=minutely,alerts&appid=" +
+    //     process.env.REACT_APP_WKEY;
+    //   axios
+    //     .get(weatherAPI)
+    //     .then((res) => {
+    //       this.setState({
+    //         weatherResults: res,
+    //         temp: res.data.current.temp,
+    //         humidity: res.data.current.humidity,
+    //         weatherDescription: res.data.current.weather[0].description,
+    //         windSpeed: res.data.current.wind_speed,
+    //       });
+    //       return axios.get(weatherAPI);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    //   // Reverse Geocoding API
+    //   const reverseGeocoding =
+    //     "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+    //     this.state.myLat +
+    //     "," +
+    //     this.state.myLon +
+    //     "&key=" +
+    //     process.env.REACT_APP_GKEY;
+    //   axios
+    //     .get(reverseGeocoding)
+    //     .then((res) => {
+    //       this.setState({
+    //         geocodeResults: res,
+    //         city: res.data.results[0].address_components[2].long_name,
+    //         state: res.data.results[0].address_components[4].short_name,
+    //         zip: res.data.results[0].address_components[6].long_name,
+    //       });
+    //       return axios.get(reverseGeocoding);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // } else {
+    //   console.log("Something Went Wrong!!!");
+    // }
+  }
 
   weatherButton = (e) => {
     e.preventDefault();
