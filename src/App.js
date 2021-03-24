@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import axios from "axios";
 import logo from "./assets/golfBall.svg";
 import "./App.css";
@@ -27,6 +27,7 @@ class App extends Component {
         let coordinates = pos.coords;
         this.setState({ myLat: coordinates.latitude });
         this.setState({ myLon: coordinates.longitude });
+        this.getForecast();
       },
       (err) => {
         console.warn(`Error(${err.code}): ${err.message}`);
@@ -37,10 +38,12 @@ class App extends Component {
         maximumAge: 0,
       }
     );
+    if (this.state.myLat === "undefined") {
+      alert("Please Enable Your GPS and Refresh")
+    }
   }
 
-  forecastButton = (e) => {
-    e.preventDefault();
+  getForecast() {
     if (this.state.myLat !== "undefined") {
       const weatherAPI =
         // Openweather API
@@ -124,15 +127,15 @@ class App extends Component {
             <br />
             <img src={logo} className="App-logo" alt="logo" />
             <br />
-            <Button
+            {/* <Button
               className="golfButton"
               variant="success"
-              // onClick={this.forecastButton}
+              onClick={this.forecastButton}
               onTouchStart={this.forecastButton}
             >
               <h2 className="foreButton">FORE-CAST</h2>
             </Button>
-            <br />
+            <br /> */}
             <section className="section">
               <h3 className="section">Temp: {this.state.temp} Fehrenheit</h3>
               <h5 className="section">Humidity: {this.state.humidity}%</h5>
