@@ -1,5 +1,7 @@
 {
   "name": "fore-cast",
+  "homepage": "https://j-mckinney.github.io/fore-cast/",
+  "author": "Jesse MᶜKinney",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
