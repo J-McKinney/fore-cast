@@ -27,7 +27,7 @@ class App extends Component {
         let coordinates = pos.coords;
         this.setState({ myLat: coordinates.latitude });
         this.setState({ myLon: coordinates.longitude });
-        this.getForecast();
+        // this.getForecast();
       },
       (err) => {
         console.warn(`Error(${err.code}): ${err.message}`);
@@ -38,9 +38,18 @@ class App extends Component {
         maximumAge: 0,
       }
     );
-    if (this.state.myLat === "undefined") {
-      alert("Please Enable Your GPS and Refresh")
-    }
+  }
+
+  componentDidCatch() {
+    // console.log("componentDidCatch");
+  }
+  componentDidUpdate() {
+    // console.log("componentDidUpdate");
+    this.getForecast();
+  }
+  componentWillUnmount() {
+    // console.log("componentWillUnmount");
+    // this.getForecast();
   }
 
   getForecast() {
@@ -117,7 +126,7 @@ class App extends Component {
       .catch((error) => {
         console.log(error);
       });
-  };
+  }
 
   render() {
     return (
