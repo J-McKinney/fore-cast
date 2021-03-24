@@ -148,7 +148,7 @@ class App extends Component {
                 Wind Speed: {this.state.windSpeed} mph
               </h5>
               <h5 className="section">
-                Fore-cast: {this.state.weatherDescription}
+                Forecast: {this.state.weatherDescription}
               </h5>
               <h3 className="section">
                 Your Location:
