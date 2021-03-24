@@ -127,9 +127,10 @@ class App extends Component {
             <Button
               className="golfButton"
               variant="success"
-              onClick={this.forecastButton}
+              // onClick={this.forecastButton}
+              onTouchStart={this.forecastButton}
             >
-              <h2 className="foreButton" >FORE-CAST</h2>
+              <h2 className="foreButton">FORE-CAST</h2>
             </Button>
             <br />
             <section className="section">
