@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import Button from "react-bootstrap/Button";
 import axios from "axios";
-import logo from "./logo.svg";
+import logo from "./assets/golfBall.svg";
 import "./App.css";
 require("dotenv").config();
 
@@ -130,9 +131,12 @@ class App extends Component {
       <>
         <div className="App">
           <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
             <br />
-            <button onClick={this.forecastButton}><h2>FORE-CAST</h2></button>
+            <img src={logo} className="App-logo" alt="logo" />
+            <Button onClick={this.forecastButton}>
+              <h2>FORE-CAST</h2>
+            </Button>
+            <br />
             <section className="section">
               <h3 className="section">Temp: {this.state.temp} Fehrenheit</h3>
               <h5 className="section">Humidity: {this.state.humidity}%</h5>
