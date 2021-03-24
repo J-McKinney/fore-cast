@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import Button from "react-bootstrap/Button";
+import Button from "react-bootstrap/Button";
 import axios from "axios";
 import logo from "./assets/golfBall.svg";
 import "./App.css";
@@ -37,22 +37,24 @@ class App extends Component {
         timeout: 5000,
         maximumAge: 0,
       }
-    );
+      );
+      console.log(navigator.geolocation)
   }
 
   componentDidCatch() {
-    // console.log("componentDidCatch");
+    console.log("componentDidCatch");
   }
   componentDidUpdate() {
-    // console.log("componentDidUpdate");
-    this.getForecast();
+    if (this.state.myLat || this.state.myLon !== "undefined") {
+      console.log("componentDidUpdate");
+    }
   }
   componentWillUnmount() {
-    // console.log("componentWillUnmount");
-    // this.getForecast();
+    console.log("componentWillUnmount");
   }
-
-  getForecast() {
+  // getForecast() {
+  getForecast = (e) => {
+    e.preventDefault();
     if (this.state.myLat !== "undefined") {
       const weatherAPI =
         // Openweather API
@@ -126,7 +128,7 @@ class App extends Component {
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
 
   render() {
     return (
@@ -136,15 +138,15 @@ class App extends Component {
             <br />
             <img src={logo} className="App-logo" alt="logo" />
             <br />
-            {/* <Button
+            <Button
               className="golfButton"
               variant="success"
-              onClick={this.forecastButton}
-              onTouchStart={this.forecastButton}
+              onClick={this.getForecast}
+              // onTouch={this.getForecast}
             >
               <h2 className="foreButton">FORE-CAST</h2>
             </Button>
-            <br /> */}
+            <br />
             <section className="section">
               <h3 className="section">Temp: {this.state.temp} Fehrenheit</h3>
               <h5 className="section">Humidity: {this.state.humidity}%</h5>
