@@ -27,7 +27,6 @@ class App extends Component {
         let coordinates = pos.coords;
         this.setState({ myLat: coordinates.latitude });
         this.setState({ myLon: coordinates.longitude });
-        // this.getForecast();
       },
       (err) => {
         console.warn(`Error(${err.code}): ${err.message}`);
@@ -37,22 +36,9 @@ class App extends Component {
         timeout: 5000,
         maximumAge: 0,
       }
-      );
-      console.log(navigator.geolocation)
+    );
   }
 
-  componentDidCatch() {
-    console.log("componentDidCatch");
-  }
-  componentDidUpdate() {
-    if (this.state.myLat || this.state.myLon !== "undefined") {
-      console.log("componentDidUpdate");
-    }
-  }
-  componentWillUnmount() {
-    console.log("componentWillUnmount");
-  }
-  // getForecast() {
   getForecast = (e) => {
     e.preventDefault();
     if (this.state.myLat !== "undefined") {
