@@ -7,7 +7,6 @@ require("dotenv").config();
 
 class App extends Component {
   state = {
-    weatherResults: "",
     temp: "",
     humidity: "",
     windSpeed: "",
@@ -15,12 +14,8 @@ class App extends Component {
     city: "",
     state: "",
     zip: "",
-    geocodeResults: "",
     myLat: "",
     myLon: "",
-    // sort_by: "distance", "rating"
-    // price: "$", "$$", "$$$", "$$$$"
-    // attributes: "open_to_all"
     placesToGolf: [],
     pickedGolfLat: "",
     pickedGolfLon: "",
@@ -32,7 +27,6 @@ class App extends Component {
         let coordinates = pos.coords;
         this.setState({ myLat: coordinates.latitude });
         this.setState({ myLon: coordinates.longitude });
-        console.log(coordinates);
       },
       (err) => {
         console.warn(`Error(${err.code}): ${err.message}`);
@@ -60,7 +54,6 @@ class App extends Component {
         .get(weatherAPI)
         .then((res) => {
           this.setState({
-            weatherResults: res,
             temp: res.data.current.temp,
             humidity: res.data.current.humidity,
             weatherDescription: res.data.current.weather[0].description,
@@ -83,7 +76,6 @@ class App extends Component {
         .get(reverseGeocoding)
         .then((res) => {
           this.setState({
-            geocodeResults: res,
             city: res.data.results[0].address_components[2].long_name,
             state: res.data.results[0].address_components[4].short_name,
             zip: res.data.results[0].address_components[6].long_name,
@@ -109,8 +101,7 @@ class App extends Component {
           limit: 50,
           radius: 40000,
           sort_by: "distance",
-          // open_now will need to be set to true for the user
-          // open_now: true,
+          open_now: true,
           latitude: this.state.myLat,
           longitude: this.state.myLon,
         },
