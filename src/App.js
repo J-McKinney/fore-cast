@@ -119,7 +119,6 @@ class App extends Component {
     return yelpAPI
       .then((res) => {
         this.setState({ placesToGolf: res.data.businesses });
-        console.log(this.state.placesToGolf);
       })
       .catch((error) => {
         console.log(error);
@@ -133,8 +132,13 @@ class App extends Component {
           <header className="App-header">
             <br />
             <img src={logo} className="App-logo" alt="logo" />
-            <Button onClick={this.forecastButton}>
-              <h2>FORE-CAST</h2>
+            <br />
+            <Button
+              className="golfButton"
+              variant="success"
+              onClick={this.forecastButton}
+            >
+              <h2 className="foreButton" >FORE-CAST</h2>
             </Button>
             <br />
             <section className="section">
@@ -155,21 +159,31 @@ class App extends Component {
                   " " +
                   this.state.zip}
               </h3>
-              <hr />
+              <hr className="hr" />
               <h3>Golf Results Closest To Furthest From You:</h3>
-              <hr />
+              <hr className="hr" />
               <div>
                 {this.state.placesToGolf
                   .filter((place) => place)
                   .map((filteredPlaces) => (
                     <header key={filteredPlaces.id}>
-                      <h2>{filteredPlaces.name}</h2>
-                      <h4>{filteredPlaces.display_phone}</h4>
-                      <h4>{filteredPlaces.location.display_address[0]}</h4>
-                      <h4>{filteredPlaces.location.display_address[1]}</h4>
-                      <h4>{filteredPlaces.location.display_address[2]}</h4>
-                      <h4>Rating: {filteredPlaces.rating}/5</h4>
-                      <hr />
+                      <h2 className="section">{filteredPlaces.name}</h2>
+                      <h4 className="section">
+                        {filteredPlaces.display_phone}
+                      </h4>
+                      <h4 className="section">
+                        {filteredPlaces.location.display_address[0]}
+                      </h4>
+                      <h4 className="section">
+                        {filteredPlaces.location.display_address[1]}
+                      </h4>
+                      <h4 className="section">
+                        {filteredPlaces.location.display_address[2]}
+                      </h4>
+                      <h4 className="section">
+                        Rating: {filteredPlaces.rating}/5
+                      </h4>
+                      <hr className="hr" />
                     </header>
                   ))}
               </div>

@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  background-image: url(./assets/golf2.png);
+  background-position: center;
+  height: 100%;
 }
 
 .App-logo {
@@ -14,14 +17,13 @@
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #282c34;
 }
 
 @keyframes App-logo-spin {
@@ -35,7 +37,22 @@
 
 .section {
   font-size: calc(10px + 2vmin);
+  font-weight: bold;
   /* display: flex;
   flex-direction: column;
   justify-content: center; */
+}
+
+.golfButton {
+  border-color: #282c34;
+  border-width: 5px;
+  border-radius: 20%;
+}
+
+.foreButton {
+  font-size: calc(10px + 2vmin);
+}
+
+.hr {
+  background-color: white;
 }
