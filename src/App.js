@@ -44,29 +44,32 @@ class App extends Component {
     console.log(navigator.permissions);
   }
 
-  handlePermission = (e) => {
-    e.preventDefault();
-    navigator.permissions
-      .query({ name: "geolocation" })
-      .then(function (result) {
-        if (result.state === "granted") {
-          alert(result.state);
-        } else if (result.state === "prompt") {
-          alert(result.state);
-          navigator.geolocation.getCurrentPosition((pos) => {
-            let coordinates = pos.coords;
-            this.setState({ myLat: coordinates.latitude });
-            this.setState({ myLon: coordinates.longitude });
-          });
-        } else if (result.state === "denied") {
-          alert(result.state);
-        }
-        result.onChange = function () {
-          alert(result.state);
-        };
-      });
-    console.log("Permission: ");
-  };
+  // handlePermission = (e) => {
+  //   e.preventDefault();
+  //   navigator.permissions
+  //     .query({ name: "geolocation" })
+  //     .then(function (result) {
+  //       if (result.state === "granted") {
+  //         if (window.confirm("Is this working now?")) {
+  //           // result.state = true;
+  //           // console.log(PermissionStatus());
+  //         }
+  //         alert(result.state);
+  //       } else if (result.state === "prompt") {
+  //         alert(result.state);
+  //         navigator.geolocation.getCurrentPosition((pos) => {
+  //           let coordinates = pos.coords;
+  //           this.setState({ myLat: coordinates.latitude });
+  //           this.setState({ myLon: coordinates.longitude });
+  //         });
+  //       } else if (result.state === "denied") {
+  //         alert(result.state);
+  //       }
+  //       result.onChange = function () {
+  //         alert(result.state);
+  //       };
+  //     });
+  // };
 
   getForecast = (e) => {
     e.preventDefault();
@@ -156,7 +159,7 @@ class App extends Component {
           <header className="App-header">
             <br />
             <img src={logo} className="App-logo" alt="logo" />
-            <Button onClick={this.handlePermission}>You Shall Not Pass!</Button>
+            {/* <Button onClick={this.handlePermission}>You Shall Not Pass!</Button> */}
             <br />
             <Button
               className="golfButton"
