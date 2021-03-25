@@ -31,11 +31,11 @@ class App extends Component {
       (err) => {
         console.warn(`Error(${err.code}): ${err.message}`);
         alert("Something Went Wrong 1 " + err)
-        alert("Something Went Wrong 2 " + err.code)
+        alert("Something Went Wrong 2: #" + err.code)
         alert("Something Went Wrong 3 " + err.message)
       },
       {
-        enableHighAccuracy: false,
+        enableHighAccuracy: true,
         timeout: 5000,
         maximumAge: 0,
       }
@@ -66,7 +66,7 @@ class App extends Component {
         })
         .catch((error) => {
           console.log(error);
-          alert("Something Went Wrong4 " + error)
+          alert("Something Went Wrong 4 " + error)
         });
       // Reverse Geocoding API
       const reverseGeocoding =
@@ -88,11 +88,11 @@ class App extends Component {
         })
         .catch((error) => {
           console.log(error);
-          alert("Something Went Wrong5 " + error)
+          alert("Something Went Wrong 5 " + error)
         });
     } else {
       console.log("Something Went Wrong!!!");
-      alert("Something Went Wrong6")
+      alert("Something Went Wrong 6")
     }
     // Yelp API
     const yelpAPI = axios.get(
@@ -119,7 +119,7 @@ class App extends Component {
       })
       .catch((error) => {
         console.log(error);
-        alert("Something Went Wrong7 "+ error)
+        alert("Something Went Wrong 7 "+ error)
       });
   };
 
