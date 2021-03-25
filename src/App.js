@@ -7,6 +7,7 @@ require("dotenv").config();
 
 class App extends Component {
   state = {
+    permissionStatus: false,
     temp: "",
     humidity: "",
     windSpeed: "",
@@ -30,9 +31,9 @@ class App extends Component {
       },
       (err) => {
         console.warn(`Error(${err.code}): ${err.message}`);
-        alert("Something Went Wrong 1 " + err)
-        alert("Something Went Wrong 2: #" + err.code)
-        alert("Something Went Wrong 3 " + err.message)
+        alert("Something Went Wrong 1 " + err);
+        alert("Something Went Wrong 2: #" + err.code);
+        alert("Something Went Wrong 3 " + err.message);
       },
       {
         enableHighAccuracy: true,
@@ -40,7 +41,32 @@ class App extends Component {
         maximumAge: 0,
       }
     );
+    console.log(navigator.permissions);
   }
+
+  handlePermission = (e) => {
+    e.preventDefault();
+    navigator.permissions
+      .query({ name: "geolocation" })
+      .then(function (result) {
+        if (result.state === "granted") {
+          alert(result.state);
+        } else if (result.state === "prompt") {
+          alert(result.state);
+          navigator.geolocation.getCurrentPosition((pos) => {
+            let coordinates = pos.coords;
+            this.setState({ myLat: coordinates.latitude });
+            this.setState({ myLon: coordinates.longitude });
+          });
+        } else if (result.state === "denied") {
+          alert(result.state);
+        }
+        result.onChange = function () {
+          alert(result.state);
+        };
+      });
+    console.log("Permission: ");
+  };
 
   getForecast = (e) => {
     e.preventDefault();
@@ -66,7 +92,7 @@ class App extends Component {
         })
         .catch((error) => {
           console.log(error);
-          alert("Something Went Wrong 4 " + error)
+          alert("Something Went Wrong 4 " + error);
         });
       // Reverse Geocoding API
       const reverseGeocoding =
@@ -88,11 +114,11 @@ class App extends Component {
         })
         .catch((error) => {
           console.log(error);
-          alert("Something Went Wrong 5 " + error)
+          alert("Something Went Wrong 5 " + error);
         });
     } else {
       console.log("Something Went Wrong!!!");
-      alert("Something Went Wrong 6")
+      alert("Something Went Wrong 6");
     }
     // Yelp API
     const yelpAPI = axios.get(
@@ -119,7 +145,7 @@ class App extends Component {
       })
       .catch((error) => {
         console.log(error);
-        alert("Something Went Wrong 7 "+ error)
+        alert("Something Went Wrong 7 " + error);
       });
   };
 
@@ -130,6 +156,7 @@ class App extends Component {
           <header className="App-header">
             <br />
             <img src={logo} className="App-logo" alt="logo" />
+            <Button onClick={this.handlePermission}>You Shall Not Pass!</Button>
             <br />
             <Button
               className="golfButton"
