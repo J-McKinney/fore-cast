@@ -30,6 +30,7 @@ class App extends Component {
       },
       (err) => {
         console.warn(`Error(${err.code}): ${err.message}`);
+        alert("Something Went Wrong 1")
       },
       {
         enableHighAccuracy: true,
@@ -63,6 +64,7 @@ class App extends Component {
         })
         .catch((error) => {
           console.log(error);
+          alert("Something Went Wrong2")
         });
       // Reverse Geocoding API
       const reverseGeocoding =
@@ -84,9 +86,11 @@ class App extends Component {
         })
         .catch((error) => {
           console.log(error);
+          alert("Something Went Wrong3")
         });
     } else {
       console.log("Something Went Wrong!!!");
+      alert("Something Went Wrong4")
     }
     // Yelp API
     const yelpAPI = axios.get(
@@ -113,6 +117,7 @@ class App extends Component {
       })
       .catch((error) => {
         console.log(error);
+        alert("Something Went Wrong5")
       });
   };
 
