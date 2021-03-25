@@ -35,8 +35,8 @@ class App extends Component {
         alert("Something Went Wrong 3 " + err.message)
       },
       {
-        enableHighAccuracy: true,
-        timeout: 61000,
+        enableHighAccuracy: false,
+        timeout: 5000,
         maximumAge: 0,
       }
     );
