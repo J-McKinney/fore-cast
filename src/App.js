@@ -41,7 +41,9 @@ class App extends Component {
         maximumAge: 0,
       }
     );
-    console.log(navigator.permissions);
+    console.log(navigator.userActivation);
+    alert("hasBeenActive: "+ navigator.userActivation.hasBeenActive)
+    alert("isActive: "+navigator.userActivation.isActive)
   }
 
   // handlePermission = (e) => {
@@ -130,7 +132,6 @@ class App extends Component {
       {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_YKEY}`,
-          "Access-Control-Allow-Origin": "*",
         },
         params: {
           term: "golf",
@@ -147,7 +148,6 @@ class App extends Component {
     return yelpAPI
       .then((res) => {
         this.setState({ placesToGolf: res.data.businesses });
-        console.log(this.state.placesToGolf);
       })
       .catch((error) => {
         console.log(error);
