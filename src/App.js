@@ -23,35 +23,6 @@ class App extends Component {
   };
 
   componentDidMount() {
-    // navigator.geolocation.getCurrentPosition(
-    //   (pos) => {
-    //     let coordinates = pos.coords;
-    //     this.setState({ myLat: coordinates.latitude });
-    //     this.setState({ myLon: coordinates.longitude });
-    //   },
-    //   (err) => {
-    //     console.warn(`Error(${err.code}): ${err.message}`);
-    //     alert("Something Went Wrong 1 " + err);
-    //     alert("Something Went Wrong 2: #" + err.code);
-    //     alert("Something Went Wrong 3 " + err.message);
-    //   },
-    //   {
-    //     enableHighAccuracy: true,
-    //     timeout: 5000,
-    //     maximumAge: 0,
-    //   }
-    // );
-    // console.log(navigator.userActivation);
-    // alert("hasBeenActive: " + navigator.userActivation.hasBeenActive);
-    // alert("isActive: " + navigator.userActivation.isActive);
-  }
-
-  componentDidUpdate() {
-    alert(this.state.myLat + ", " + this.state.myLon);
-  }
-
-  getLocation = (e) => {
-    e.preventDefault();
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         let coordinates = pos.coords;
@@ -60,9 +31,6 @@ class App extends Component {
       },
       (err) => {
         console.warn(`Error(${err.code}): ${err.message}`);
-        alert("Something Went Wrong 1 " + err);
-        alert("Something Went Wrong 2: #" + err.code);
-        alert("Something Went Wrong 3 " + err.message);
       },
       {
         enableHighAccuracy: true,
@@ -70,8 +38,7 @@ class App extends Component {
         maximumAge: 0,
       }
     );
-    console.log(this.state.myLat + ", " + this.state.myLon);
-  };
+  }
 
   getForecast = (e) => {
     e.preventDefault();
@@ -97,7 +64,6 @@ class App extends Component {
         })
         .catch((error) => {
           console.log(error);
-          alert("Something Went Wrong 4 " + error);
         });
       // Reverse Geocoding API
       const reverseGeocoding =
@@ -119,11 +85,9 @@ class App extends Component {
         })
         .catch((error) => {
           console.log(error);
-          alert("Something Went Wrong 5 " + error);
         });
     } else {
       console.log("Something Went Wrong!!!");
-      alert("Something Went Wrong 6");
     }
     // Yelp API
     const yelpAPI = axios.get(
@@ -151,7 +115,6 @@ class App extends Component {
       })
       .catch((error) => {
         console.log(error);
-        alert("Something Went Wrong 7 " + error);
       });
   };
 
@@ -162,14 +125,6 @@ class App extends Component {
           <header className="App-header">
             <br />
             <img src={logo} className="App-logo" alt="logo" />
-            <br />
-            <Button
-              className="golfButton"
-              variant="success"
-              onClick={this.getLocation}
-            >
-              <h2 className="foreButton">getLocation</h2>
-            </Button>
             <br />
             <Button
               className="golfButton"
