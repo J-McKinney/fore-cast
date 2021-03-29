@@ -125,10 +125,12 @@ class App extends Component {
     }
     // Yelp API
     const yelpAPI = axios.get(
-      `${"https://corsanywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/search`,
+      // `${"https://cors-anywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/search`,
+      `${"https://cors.bridged.cc/"}https://api.yelp.com/v3/businesses/search`,
       {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_YKEY}`,
+          // AccessControlAllowOrigin: "*",
         },
         params: {
           term: "golf",
@@ -145,6 +147,7 @@ class App extends Component {
     return yelpAPI
       .then((res) => {
         this.setState({ placesToGolf: res.data.businesses });
+        console.log(this.state.placesToGolf);
       })
       .catch((error) => {
         console.log(error);
@@ -196,7 +199,7 @@ class App extends Component {
                   .filter((place) => place)
                   .map((filteredPlaces) => (
                     <header key={filteredPlaces.id}>
-                      <h2 className="section">{filteredPlaces.name}</h2>
+                      <h1 className="section">{filteredPlaces.name}</h1>
                       <h4 className="section">
                         {filteredPlaces.display_phone}
                       </h4>
