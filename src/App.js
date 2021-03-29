@@ -130,7 +130,7 @@ class App extends Component {
       {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_YKEY}`,
-          // AccessControlAllowOrigin: "*",
+          "Access-Control-Allow-Origin": "*",
         },
         params: {
           term: "golf",
