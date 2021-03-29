@@ -23,6 +23,35 @@ class App extends Component {
   };
 
   componentDidMount() {
+    // navigator.geolocation.getCurrentPosition(
+    //   (pos) => {
+    //     let coordinates = pos.coords;
+    //     this.setState({ myLat: coordinates.latitude });
+    //     this.setState({ myLon: coordinates.longitude });
+    //   },
+    //   (err) => {
+    //     console.warn(`Error(${err.code}): ${err.message}`);
+    //     alert("Something Went Wrong 1 " + err);
+    //     alert("Something Went Wrong 2: #" + err.code);
+    //     alert("Something Went Wrong 3 " + err.message);
+    //   },
+    //   {
+    //     enableHighAccuracy: true,
+    //     timeout: 5000,
+    //     maximumAge: 0,
+    //   }
+    // );
+    // console.log(navigator.userActivation);
+    // alert("hasBeenActive: " + navigator.userActivation.hasBeenActive);
+    // alert("isActive: " + navigator.userActivation.isActive);
+  }
+
+  componentDidUpdate() {
+    alert(this.state.myLat + ", " + this.state.myLon);
+  }
+
+  getLocation = (e) => {
+    e.preventDefault();
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         let coordinates = pos.coords;
@@ -41,37 +70,8 @@ class App extends Component {
         maximumAge: 0,
       }
     );
-    console.log(navigator.userActivation);
-    alert("hasBeenActive: "+ navigator.userActivation.hasBeenActive)
-    alert("isActive: "+navigator.userActivation.isActive)
-  }
-
-  // handlePermission = (e) => {
-  //   e.preventDefault();
-  //   navigator.permissions
-  //     .query({ name: "geolocation" })
-  //     .then(function (result) {
-  //       if (result.state === "granted") {
-  //         if (window.confirm("Is this working now?")) {
-  //           // result.state = true;
-  //           // console.log(PermissionStatus());
-  //         }
-  //         alert(result.state);
-  //       } else if (result.state === "prompt") {
-  //         alert(result.state);
-  //         navigator.geolocation.getCurrentPosition((pos) => {
-  //           let coordinates = pos.coords;
-  //           this.setState({ myLat: coordinates.latitude });
-  //           this.setState({ myLon: coordinates.longitude });
-  //         });
-  //       } else if (result.state === "denied") {
-  //         alert(result.state);
-  //       }
-  //       result.onChange = function () {
-  //         alert(result.state);
-  //       };
-  //     });
-  // };
+    console.log(this.state.myLat + ", " + this.state.myLon);
+  };
 
   getForecast = (e) => {
     e.preventDefault();
@@ -162,13 +162,19 @@ class App extends Component {
           <header className="App-header">
             <br />
             <img src={logo} className="App-logo" alt="logo" />
-            {/* <Button onClick={this.handlePermission}>You Shall Not Pass!</Button> */}
+            <br />
+            <Button
+              className="golfButton"
+              variant="success"
+              onClick={this.getLocation}
+            >
+              <h2 className="foreButton">getLocation</h2>
+            </Button>
             <br />
             <Button
               className="golfButton"
               variant="success"
               onClick={this.getForecast}
-              // onTouch={this.getForecast}
             >
               <h2 className="foreButton">FORE-CAST</h2>
             </Button>
