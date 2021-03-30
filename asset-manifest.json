@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/fore-cast/static/css/main.c550f3a9.chunk.css",
+    "main.css": "/fore-cast/static/css/main.4ae4de06.chunk.css",
     "main.js": "/fore-cast/static/js/main.48495272.chunk.js",
     "main.js.map": "/fore-cast/static/js/main.48495272.chunk.js.map",
     "runtime-main.js": "/fore-cast/static/js/runtime-main.befded32.js",
@@ -10,7 +10,7 @@
     "static/js/3.a6f12729.chunk.js": "/fore-cast/static/js/3.a6f12729.chunk.js",
     "static/js/3.a6f12729.chunk.js.map": "/fore-cast/static/js/3.a6f12729.chunk.js.map",
     "index.html": "/fore-cast/index.html",
-    "static/css/main.c550f3a9.chunk.css.map": "/fore-cast/static/css/main.c550f3a9.chunk.css.map",
+    "static/css/main.4ae4de06.chunk.css.map": "/fore-cast/static/css/main.4ae4de06.chunk.css.map",
     "static/js/2.02c42f6c.chunk.js.LICENSE.txt": "/fore-cast/static/js/2.02c42f6c.chunk.js.LICENSE.txt",
     "static/media/App.css": "/fore-cast/static/media/golf2.4e67ef83.png",
     "static/media/golfBall.4daa5f5c.svg": "/fore-cast/static/media/golfBall.4daa5f5c.svg"
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.befded32.js",
     "static/js/2.02c42f6c.chunk.js",
-    "static/css/main.c550f3a9.chunk.css",
+    "static/css/main.4ae4de06.chunk.css",
     "static/js/main.48495272.chunk.js"
   ]
 }
