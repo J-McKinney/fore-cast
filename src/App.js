@@ -35,9 +35,16 @@ class App extends Component {
       {
         enableHighAccuracy: true,
         timeout: 5000,
-        maximumAge: 0,
+        maximumAge: 100000,
       }
     );
+  }
+
+  componentDidUpdate() {
+    console.log("Lat " + this.state.myLat);
+    console.log("Lon " + this.state.myLon);
+    console.log("City " + this.state.city);
+    console.log("State " + this.state.state);
   }
 
   getForecast = (e) => {
