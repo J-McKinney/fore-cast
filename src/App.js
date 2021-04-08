@@ -41,10 +41,10 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    console.log("Lat " + this.state.myLat);
-    console.log("Lon " + this.state.myLon);
-    console.log("City " + this.state.city);
-    console.log("State " + this.state.state);
+    // console.log("Lat " + this.state.myLat);
+    // console.log("Lon " + this.state.myLon);
+    // console.log("City " + this.state.city);
+    // console.log("State " + this.state.state);
   }
 
   getForecast = (e) => {
